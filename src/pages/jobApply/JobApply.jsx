@@ -1,10 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/UseAuth';
+import Swal from 'sweetalert2';
 
 const JobApply = () => {
     const { id } = useParams();
     const { user } = useAuth();
+    const navigate = useNavigate();
 
 
 
@@ -24,6 +26,27 @@ const JobApply = () => {
             github,
             resume
         }
+
+        fetch('http://localhost:3000/job-applications', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(jobApplication)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/myApplications')
+                }
+            })
     }
     return (
         <div className="card bg-base-100 w-full shadow-2xl justify-center items-center">
