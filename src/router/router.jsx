@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/home/Home";
 import MainLayout from "../Layout/MainLayout";
+import AddJob from "../pages/AddJob/AddJob";
+import Home from "../pages/home/Home";
+import JobApply from "../pages/jobApply/JobApply";
+import JobDetails from "../pages/jobDetails/JobDetails";
+import MyApplications from "../pages/myApplication/MyApplications";
+import MyPostedJobs from "../pages/myPostedJobs/MyPostedJobs";
 import Register from "../pages/Register/Register";
 import SignIn from "../pages/signIn/SignIn";
-import JobDetails from "../pages/jobDetails/JobDetails";
-import PrivateRoute from "./PriveteRoute";
-import JobApply from "../pages/jobApply/JobApply";
-import MyApplications from "../pages/myApplication/MyApplications";
-import AddJob from "../pages/AddJob/AddJob";
-import MyPostedJobs from "../pages/myPostedJobs/MyPostedJobs";
 import ViewApplications from "../pages/viewApplications/ViewApplications";
+import PrivateRoute from "./PriveteRoute";
 
 const router = createBrowserRouter([
     {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             { 
                 path : '/job/:id',
                 element : <PrivateRoute><JobDetails/></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/jobs/${params.id}`)
+                loader: ({ params }) => fetch(`https://job-box-server-xi.vercel.app/jobs/${params.id}`)
             },
             {
                 path : 'jobApply/:id',
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
             {
                 path: 'viewApplications/:job_id',
                 element: <PrivateRoute><ViewApplications></ViewApplications></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/job-applications/jobs/${params.job_id}`)
+                loader: ({ params }) => fetch(`https://job-box-server-xi.vercel.app/job-applications/jobs/${params.job_id}`)
               },
             {
                 path : 'register',

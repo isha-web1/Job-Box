@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useAuth from '../../hooks/UseAuth';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/UseAuth';
 
 const JobApply = () => {
     const { id } = useParams();
@@ -27,7 +27,7 @@ const JobApply = () => {
             resume
         }
 
-        fetch('http://localhost:3000/job-applications', {
+        fetch('https://job-box-server-xi.vercel.app/job-applications', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

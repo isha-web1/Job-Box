@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import AuthContext from './AuthContext';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import auth from '../../firebase/firebase.init';
 import axios from 'axios';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import auth from '../../firebase/firebase.init';
+import AuthContext from './AuthContext';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -38,7 +38,7 @@ const AuthProvider = ({children}) => {
             if (currentUser?.email) {
                 const user = { email: currentUser.email };
 
-                axios.post('http://localhost:3000/jwt', user, { withCredentials: true })
+                axios.post('https://job-box-server-xi.vercel.app/jwt', user, { withCredentials: true })
                     .then(res => {
                         console.log('login token', res.data);
                         setLoading(false);
@@ -46,7 +46,7 @@ const AuthProvider = ({children}) => {
 
             }
             else {
-                axios.post('http://localhost:3000/logout', {}, {
+                axios.post('https://job-box-server-xi.vercel.app/logout', {}, {
                     withCredentials: true
                 })
                 .then(res => {
